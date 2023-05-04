@@ -103,7 +103,7 @@ In order to run this project you need:
 Clone this repository to your desired folder:
 
 ```
-  git clone https://github.com/abiy006/Capstone-One.git
+  git clone https://github.com/abiy006/webpack-todo.git
 ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -121,7 +121,7 @@ Clone this repository to your desired folder:
 
 Brife description of this capstone walkthrough until at this point
 
-- Walkthrough: [ Walkthrough](https://www.loom.com/share/fb12380aa2964c4f9641a18f9aea6c19)
+- Walkthrough: [ Walkthrough](#)
 
 <!-- CONTRIBUTING -->
 

@@ -20,14 +20,14 @@ const arrayToDo = [
 
 function createMyToDo() {
   const mytodoo = document.getElementById('mytodo');
-
-  const h1 = document.createElement('p');
-  h1.textContent = "Today's To Do";
-  h1.style.display = 'flex';
-  h1.style.height = '3rem';
-  h1.style.alignItems = 'center';
-  h1.style.borderBottom = '1px solid gray';
-  mytodoo.appendChild(h1);
+  // const h1 = document.getElementById('h1id');
+  // h1.textContent = "Today's To Do";
+  // h1.style.display = 'flex';
+  // h1.style.height = '3rem';
+  // h1.style.fontSize = '3rem';
+  // h1.style.alignItems = 'center';
+  // h1.style.borderBottom = '1px solid gray';
+  // mytodoo.appendChild(h1);
 
   const p1 = document.createElement('p');
   p1.textContent = 'Add to your list...';

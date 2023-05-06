@@ -4,3 +4,5 @@ import { todos } from './array_todo.js';
 
 const todolist = new TodoList(todos);
 todolist.displayTodos(todos);
+// return todolist;
+// todolist.myTodoList(todos);

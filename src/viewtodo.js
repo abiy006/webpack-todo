@@ -1,5 +1,6 @@
 import addTodo from './add_todo.js';
 import removeTheList from './remove_todo.js';
+import { toggleChkBox, clearCompletedChkBox } from './checkbox_todo.js';
 
 export default function displayTodos(todos) {
   const todoList = document.getElementById('mytodo');
@@ -10,7 +11,9 @@ export default function displayTodos(todos) {
   todoHeader.innerHTML = "Today's To Do";
   todoList.appendChild(todoHeader);
   const form = document.createElement('form');
-  form.addEventListener('submit', addTodo.bind(todos));
+  form.style.display = 'flex';
+  form.style.width = '50%';
+  form.addEventListener('submit', () => { addTodo(todos); });
   const input1 = document.createElement('input');
   input1.id = 'target_todo';
   input1.type = 'text';
@@ -18,10 +21,11 @@ export default function displayTodos(todos) {
   input1.style.fontStyle = 'italic';
   input1.style.display = 'flex';
   input1.style.height = '2rem';
-  input1.style.width = '50%';
+  input1.style.width = '100%';
   input1.style.alignItems = 'center';
   form.appendChild(input1);
   todoList.appendChild(form);
+
   todos.forEach((todo, index) => {
     const chkbox = document.createElement('input');
     chkbox.type = 'checkbox';
@@ -31,16 +35,13 @@ export default function displayTodos(todos) {
       chkbox.checked = false;
     }
     chkbox.addEventListener('click', () => {
-      // alert("index "+index)
-      todos[index].completed = !todos[index].completed;
-      localStorage.setItem('todos', JSON.stringify(todos));
+      toggleChkBox(todos, index);
     });
 
     const li = document.createElement('li');
     li.className = 'mytodolist';
     li.style.width = '50%';
-    li.style.height = '2rem';
-    li.style.padding = '1rem';
+    li.style.height = '3rem';
     li.style.display = 'flex';
     li.style.justifyContent = 'space-between';
     li.style.alignItems = 'center';
@@ -68,6 +69,7 @@ export default function displayTodos(todos) {
 
     const rmBtn = document.createElement('input');
     rmBtn.type = 'button';
+    rmBtn.style.margin = '1rem';
     rmBtn.setAttribute('class', 'removeListItem');
     rmBtn.setAttribute('data-index', `${index}`);
     rmBtn.value = 'Remove';
@@ -96,7 +98,7 @@ export default function displayTodos(todos) {
   clearAllBtn.style.width = '50%';
   clearAllBtn.style.justifyContent = 'center';
   clearAllBtn.addEventListener('click', () => {
-    // removeTheList(`${index}`, todos);
+    clearCompletedChkBox(todos);
   });
   todoList.appendChild(clearAllBtn);
 }

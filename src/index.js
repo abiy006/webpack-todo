@@ -1,7 +1,16 @@
-import './style.css';
-import TodoList from './display_todo.js';
-import displayTodos from './view_todo.js';
+import displayTodos from './viewtodo.js';
 import { todos } from './array_todo.js';
 
-const todolist = new TodoList(todos);
-displayTodos(todos);
+class TodoList {
+  constructor(todos) {
+    if (localStorage.getItem('todos')) {
+      todos = JSON.parse(localStorage.getItem('todos'));
+    }
+    displayTodos(todos);
+  }
+}
+function myfunc() {
+  return new TodoList(todos);
+}
+
+myfunc();

@@ -1,5 +1,4 @@
 export default function addTodo(todos) {
-
   if (localStorage.getItem('todos')) {
     todos = JSON.parse(localStorage.getItem('todos'));
   }

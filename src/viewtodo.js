@@ -81,9 +81,9 @@ export default function displayTodos(todos) {
     li.appendChild(desc);
     li.appendChild(rmBtn);
     if (index % 2 === 0) {
-      li.style.backgroundColor = 'gray';
-    } else {
       li.style.backgroundColor = '#ccc';
+    } else {
+      li.style.backgroundColor = 'gray';
     }
     todoList.appendChild(li);
   });
@@ -98,6 +98,9 @@ export default function displayTodos(todos) {
   clearAllBtn.style.width = '50%';
   clearAllBtn.style.justifyContent = 'center';
   clearAllBtn.addEventListener('click', () => {
+    if (localStorage.getItem('todos')) {
+      todos = JSON.parse(localStorage.getItem('todos'));
+    }
     clearCompletedChkBox(todos);
   });
   todoList.appendChild(clearAllBtn);

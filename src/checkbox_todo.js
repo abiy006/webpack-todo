@@ -4,13 +4,8 @@ export function toggleChkBox(todos, index) {
 }
 
 export const clearCompletedChkBox = (todos) => {
-  todos.forEach((todo, index) => {
-    if (todo.completed) {
-      todos.splice(index, 1);
-    }
-  });
+  todos = todos.filter((todo) => !todo.completed);
 
-  //   todos.push(newTodo);
   localStorage.setItem('todos', JSON.stringify(todos));
   window.location.reload();
 };

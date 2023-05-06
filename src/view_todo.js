@@ -30,6 +30,11 @@ export default function displayTodos(todos) {
     } else {
       chkbox.checked = false;
     }
+    chkbox.addEventListener('click', () => {
+      // alert("index "+index)
+      todos[index].completed = !todos[index].completed;
+      localStorage.setItem('todos', JSON.stringify(todos));
+    });
 
     const li = document.createElement('li');
     li.className = 'mytodolist';
@@ -80,4 +85,18 @@ export default function displayTodos(todos) {
     }
     todoList.appendChild(li);
   });
+
+  const clearAllBtn = document.createElement('input');
+  clearAllBtn.type = 'button';
+  clearAllBtn.setAttribute('class', 'clearAllBtn');
+  clearAllBtn.value = 'Clear all completed';
+  clearAllBtn.style.display = 'flex';
+  clearAllBtn.style.height = '3rem';
+  clearAllBtn.style.padding = '1rem';
+  clearAllBtn.style.width = '50%';
+  clearAllBtn.style.justifyContent = 'center';
+  clearAllBtn.addEventListener('click', () => {
+    // removeTheList(`${index}`, todos);
+  });
+  todoList.appendChild(clearAllBtn);
 }

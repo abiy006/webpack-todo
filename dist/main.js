@@ -110,13 +110,53 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
+/***/ "./src/add_todo.js":
+/*!*************************!*\
+  !*** ./src/add_todo.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"addTodo\": () => (/* binding */ addTodo)\n/* harmony export */ });\n// import { todos } from './array_todo.js';\n\n// export const addTodo = (event) => {\nfunction addTodo(todos) {\n  // event.preventDefault();\n\n  if (localStorage.getItem('todos')) {\n    todos = JSON.parse(localStorage.getItem('todos'));\n  }\n\n  const description = document.getElementById('target_todo').value;\n  const newTodo = { description, completed: false };\n  todos.push(newTodo);\n  localStorage.setItem('todos', JSON.stringify(todos));\n  window.location.reload();\n}\n\n//# sourceURL=webpack://webpack-todo/./src/add_todo.js?");
+
+/***/ }),
+
+/***/ "./src/array_todo.js":
+/*!***************************!*\
+  !*** ./src/array_todo.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"todos\": () => (/* binding */ todos)\n/* harmony export */ });\nconst todos = [];\n\n//# sourceURL=webpack://webpack-todo/./src/array_todo.js?");
+
+/***/ }),
+
+/***/ "./src/display_todo.js":
+/*!*****************************!*\
+  !*** ./src/display_todo.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ TodoList)\n/* harmony export */ });\n/* harmony import */ var _add_todo_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./add_todo.js */ \"./src/add_todo.js\");\n/* harmony import */ var _remove_todo_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./remove_todo.js */ \"./src/remove_todo.js\");\n// import { displayTodos } from './view_todo.js';\n// import { todos } from './array_todo.js';\n\n\n\n \nclass TodoList {\n  constructor(todos) {\n    // let todos = [];\n    if (localStorage.getItem('todos')) {\n      todos = JSON.parse(localStorage.getItem('todos'));\n    }\n\n    this.displayTodos(todos);\n  }\n\n    displayTodos = (todos) => {\n      const todoList = document.getElementById('mytodo');\n\n      todoList.className = 'todoList';\n      todoList.innerHTML = '';\n      const todoHeader = document.createElement('h1');\n      todoHeader.innerHTML = \"Today's To Do\";\n      todoList.appendChild(todoHeader);\n      const form = document.createElement('form');\n      form.addEventListener('submit', _add_todo_js__WEBPACK_IMPORTED_MODULE_0__.addTodo.bind(todos));\n      const input1 = document.createElement('input');\n      input1.id = 'target_todo';\n      input1.type = 'text';\n      input1.placeholder = 'Add to your list...';\n      input1.style.fontStyle = 'italic';\n      input1.style.display = 'flex';\n      input1.style.height = '2rem';\n      input1.style.width = '50%';\n      input1.style.alignItems = 'center';\n      form.appendChild(input1);\n      todoList.appendChild(form);\n      // alert(\"todoList\"+todoList)\n      // alert(\"todoList\"+todos)\n      todos.forEach((todo, index) => {\n      // alert(\"todoList\"+todos)\n        const chkbox = document.createElement('input');\n        chkbox.type = 'checkbox';\n        if (todo.completed) {\n          chkbox.checked = true;\n        } else {\n          chkbox.checked = false;\n        }\n\n        const li = document.createElement('li');\n        li.className = 'mytodolist';\n        li.style.width = '50%';\n        li.style.height = '2rem';\n        li.style.padding = '1rem';\n        li.style.display = 'flex';\n        li.style.justifyContent = 'space-between';\n        li.style.alignItems = 'center';\n        const desc = document.createElement('p');\n        desc.style.display = 'flex';\n        desc.style.justifyContent = 'center';\n        desc.style.width = '100%';\n        desc.setAttribute('class', 'addedListItem');\n        desc.textContent = todo.description;\n        desc.addEventListener('click', () => {\n          const form1 = document.createElement('form');\n          form1.id = `form${index}`;\n          const input2 = document.createElement('input');\n          input2.type = 'text';\n          input2.id = `input${index}`;\n          input2.value = todo.description;\n          li.replaceChild(form1, desc);\n          form1.appendChild(input2);\n          li.addEventListener('submit', () => {\n            const editedtext = document.getElementById(`input${index}`).value;\n            todos[index].description = editedtext;\n            localStorage.setItem('todos', JSON.stringify(todos));\n          });\n        });\n\n        const rmBtn = document.createElement('input');\n        rmBtn.type = 'button';\n        rmBtn.setAttribute('class', 'removeListItem');\n        rmBtn.setAttribute('data-index', `${index}`);\n        rmBtn.value = 'Remove';// removeTodo.bind(this));\n        rmBtn.addEventListener('click', () => {\n          (0,_remove_todo_js__WEBPACK_IMPORTED_MODULE_1__.removeTheList)(`${index}`, todos);\n        // alert(`${index}`)\n        });\n\n        li.appendChild(chkbox);\n        li.appendChild(desc);\n        li.appendChild(rmBtn);\n        // li.innerHTML = `<p class=\"editListItem\">${todo.description}</p> <button class=\"removeListItem\" data-index=\"${index}\">Remove</button>`;\n        if (index % 2 === 0) {\n          li.style.backgroundColor = 'gray';\n        } else {\n          li.style.backgroundColor = '#ccc';\n        }\n        todoList.appendChild(li);\n      });\n    };\n}\n\n//# sourceURL=webpack://webpack-todo/./src/display_todo.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\n\nconst arrayToDo = [\n  {\n    index: 1,\n    description: 'get up',\n    completed: true,\n  },\n  {\n    index: 2,\n    description: 'wash the dish',\n    completed: false,\n  },\n  {\n    index: 3,\n    description: 'complete To Do list project',\n    completed: false,\n  },\n];\n\nfunction createMyToDo() {\n  const mytodoo = document.getElementById('mytodo');\n  // const h1 = document.getElementById('h1id');\n  // h1.textContent = \"Today's To Do\";\n  // h1.style.display = 'flex';\n  // h1.style.height = '3rem';\n  // h1.style.fontSize = '3rem';\n  // h1.style.alignItems = 'center';\n  // h1.style.borderBottom = '1px solid gray';\n  // mytodoo.appendChild(h1);\n\n  const p1 = document.createElement('p');\n  p1.textContent = 'Add to your list...';\n  p1.style.fontStyle = 'italic';\n  p1.style.display = 'flex';\n  p1.style.height = '3rem';\n  p1.style.alignItems = 'center';\n  p1.style.borderBottom = '1px solid gray';\n  mytodoo.appendChild(p1);\n\n  for (let i = 0; i < arrayToDo.length; i += 1) {\n    const listItem = document.createElement('div');\n    listItem.style.display = 'flex';\n    listItem.style.height = '3rem';\n    listItem.style.alignItems = 'center';\n    listItem.style.borderBottom = '1px solid gray';\n\n    const li = document.createElement('li');\n    li.textContent = arrayToDo[i].description;\n\n    const mychkbox = document.createElement('input');\n    mychkbox.type = 'checkbox';\n    // mychkbox.value = 'yes';\n    mychkbox.style.marginRight = '1rem';\n\n    listItem.appendChild(mychkbox);\n    listItem.appendChild(li);\n\n    mytodoo.appendChild(listItem);\n  }\n\n  const p2 = document.createElement('p');\n  p2.textContent = 'Clear all completed';\n  p2.style.display = 'flex';\n  p2.style.height = '3rem';\n  p2.style.alignItems = 'center';\n  p2.style.borderBottom = '1px solid gray';\n  p2.style.backgroundColor = '#ccc';\n  mytodoo.appendChild(p2);\n}\n\ncreateMyToDo();\n\n\n//# sourceURL=webpack://webpack-todo/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _display_todo_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./display_todo.js */ \"./src/display_todo.js\");\n/* harmony import */ var _array_todo_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./array_todo.js */ \"./src/array_todo.js\");\n\n\n\n\n// export let todos = [];\n// let todos = [];\nconst todolist = new _display_todo_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"](_array_todo_js__WEBPACK_IMPORTED_MODULE_2__.todos);\n// todolist\n\n// displayTodos(todos);\n\n// todolist.displayTodos(todolist.TodoList);\n\n// todoList.addEventListener('click', removeTodo.bind(this));\n\n// displayTodos(todos);\n// todoList.addEventListener('click', removeTodo.bind(this));\n\n//# sourceURL=webpack://webpack-todo/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/remove_todo.js":
+/*!****************************!*\
+  !*** ./src/remove_todo.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"removeTheList\": () => (/* binding */ removeTheList)\n/* harmony export */ });\n// import { todos } from './array_todo.js';\n\nfunction removeTheList(myv, todos) {\n  todos.splice(myv, 1);\n  localStorage.setItem('todos', JSON.stringify(todos));\n  window.location.reload();\n}\n\n//# sourceURL=webpack://webpack-todo/./src/remove_todo.js?");
 
 /***/ })
 

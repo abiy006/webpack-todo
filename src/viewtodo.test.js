@@ -1,4 +1,4 @@
-const displayTodos = require('./viewtodo');
+const displayTodos = require('./view_todo');
 
 let store = {};
 const fakeLocalStorage = (function() {
@@ -32,8 +32,6 @@ describe('Set local storage item', () => {
     });
   
     test('Check addTodo able add todo to todoList', () => {
-
-        addTodo = require('./add_todo');
 
         const mockJson = { description: "fake-value 123", completed: false };
         addTodo(mockJson);

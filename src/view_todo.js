@@ -4,6 +4,7 @@ import { toggleChkBox, clearCompletedChkBox } from './checkbox_todo.js';
 
 // export default function displayTodos(todos) {
 function displayTodos(todos) {
+  
   const todoList = document.getElementById('mytodo');
 
   todoList.className = 'todoList';

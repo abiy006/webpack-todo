@@ -35,9 +35,4 @@ describe('Set local storage item', () => {
         addTodo(mockJson);
       expect(window.localStorage.getItem('todos')).toEqual(JSON.stringify(mockJson));
     });
-    test('Check addTodo able add todo to todoList', () => {
-      document.body.innerHTML = `
-        <input id="newTodoInput" />
-        `;
-    });
   });

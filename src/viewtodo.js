@@ -2,7 +2,8 @@ import addTodo from './add_todo.js';
 import removeTheList from './remove_todo.js';
 import { toggleChkBox, clearCompletedChkBox } from './checkbox_todo.js';
 
-export default function displayTodos(todos) {
+// export default function displayTodos(todos) {
+function displayTodos(todos) {
   const todoList = document.getElementById('mytodo');
 
   todoList.className = 'todoList';
@@ -112,3 +113,5 @@ export default function displayTodos(todos) {
   });
   todoList.appendChild(clearAllBtn);
 }
+
+module.exports = displayTodos;

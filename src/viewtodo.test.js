@@ -1,4 +1,5 @@
-const addTodo = require('./add_todo');
+const displayTodos = require('./viewtodo');
+
 let store = {};
 const fakeLocalStorage = (function() {
     
@@ -30,14 +31,19 @@ describe('Set local storage item', () => {
       });
     });
   
-    test('data is added into local storage', () => {
+    test('Check addTodo able add todo to todoList', () => {
         const mockJson = { description: "fake-value 123", completed: false };
         addTodo(mockJson);
-      expect(window.localStorage.getItem('todos')).toEqual(JSON.stringify(mockJson));
-    });
-    test('Check addTodo able add todo to todoList', () => {
-      document.body.innerHTML = `
-        <input id="newTodoInput" />
-        `;
+
+        displayTodos(mockJson); 
+    //   document.body.innerHTML = `
+    //     <input id="newTodoInput" />
+    //     `;
+
+        const todolist = document.getElementById('mytodo');
+      
+        expect(todolist.innerHTML).toBe('<li>New todolist!</li>');
+
+
     });
   });

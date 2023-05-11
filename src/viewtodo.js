@@ -82,7 +82,9 @@ export default function displayTodos(todos) {
     rmBtn.setAttribute('data-index', `${index}`);
     rmBtn.value = 'Remove';
     rmBtn.addEventListener('click', () => {
-        removeTheList(`${index}`, todos);
+      todos.splice(`${index}`, 1);
+        removeTheList(todos);
+        window.location.reload();
     });
 
     li.appendChild(chkbox);

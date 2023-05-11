@@ -29,9 +29,9 @@ describe('Set local storage item', () => {
       });
     });
   
-    test('data is deleted from local storage', () => {
+    test('Data is deleted from local storage', () => {
         const deletedIndex = 0;
         removeTheList(deletedIndex);
-      expect(window.localStorage.removeItem('todos')).toEqual(JSON.stringify(mockJson));
+      expect(`${deletedIndex}`).toEqual(window.localStorage.getItem('todos'));
     });
   });

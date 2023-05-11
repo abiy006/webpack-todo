@@ -30,7 +30,7 @@ describe('Set local storage item', () => {
     });
   
     test('Data is deleted from local storage', () => {
-        const deletedIndex = 0;
+        const deletedIndex = 1;
         removeTheList(deletedIndex);
       expect(`${deletedIndex}`).toEqual(window.localStorage.getItem('todos'));
     });

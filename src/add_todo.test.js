@@ -31,7 +31,7 @@ describe('Set local storage item', () => {
     });
   
     test('data is added into local storage', () => {
-        const mockJson = { description: "fake-value", completed: false };
+        const mockJson = { description: "fake-value 123", completed: false };
         addTodo(mockJson);
       expect(window.localStorage.getItem('todos')).toEqual(JSON.stringify(mockJson));
     });

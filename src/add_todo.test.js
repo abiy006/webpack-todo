@@ -35,4 +35,13 @@ describe('Set local storage item', () => {
         addTodo(mockJson);
       expect(window.localStorage.getItem('todos')).toEqual(JSON.stringify(mockJson));
     });
+
+    test('check if a new element is added', () => {
+  
+      // Check if an element with the expected text content was added to the DOM
+      const addedItem = document.querySelector('#list-item-container').children[0];
+  
+      expect(addedItem).not.toBeNull();
+    });
+
   });

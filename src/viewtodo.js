@@ -98,6 +98,7 @@ export default function displayTodos(todos) {
   clearAllBtn.style.justifyContent = 'center';
   clearAllBtn.addEventListener('click', () => {
     clearCompletedChkBox(todos);
+    window.location.reload();
   });
   todoList.appendChild(clearAllBtn);
 }

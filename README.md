@@ -64,6 +64,12 @@
 - Twitter: [@Abit Twitter](https://twitter.com/Abiy62463489)
 - LinkedIn: [@Abit LinkedIn](https://www.linkedin.com/in/abiy-hussen-aman-194587183/)
 
+👤 **Marco Baquero**
+
+- GitHub: [@Marco Github](https://github.com/mrcbq)
+- Twitter: [@Marco Twitter](https://twitter.com/handle)
+- LinkedIn: [@Marco LinkedIn](https://www.linkedin.com/in/handle/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Features -->
@@ -105,6 +111,27 @@ Clone this repository to your desired folder:
 ```
   git clone https://github.com/abiy006/webpack-todo.git
 ```
+
+### Install
+
+<!-- Install this project with: -->
+
+To install the project, execute the following command:
+
+npm install
+
+### Usage
+
+To run the project, execute the following command:
+
+npm start
+
+### Run tests
+
+To run tests, run the following command:
+
+npm test
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->

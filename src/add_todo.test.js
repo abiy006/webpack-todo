@@ -1,26 +1,29 @@
-const jsdom = require("jsdom");
+const jsdom = require('jsdom');
+
 const { JSDOM } = jsdom;
 
-const addTodo = require('./add_todo');
+const addTodo = require('./add_todo.js');
+
 let store = {};
-const fakeLocalStorage = (function () {
+// const fakeLocalStorage = (function () {
+const fakeLocalStorage = () => ({
+  getItem(key) {
+    return store[key] || null;
+  },
+  setItem(key, value) {
+    store[key] = value.toString();
+  },
+  removeItem(key) {
+    delete store[key];
+  },
+  clear() {
+    store = {};
+  },
+});
 
-
-  return {
-    getItem: function (key) {
-      return store[key] || null;
-    },
-    setItem: function (key, value) {
-      store[key] = value.toString();
-    },
-    removeItem: function (key) {
-      delete store[key];
-    },
-    clear: function () {
-      store = {};
-    }
-  };
-})();
+Object.defineProperty(window, 'localStorage', {
+  value: fakeLocalStorage,
+});
 
 describe('Set local storage item', () => {
   const dom = new JSDOM(
@@ -47,14 +50,12 @@ describe('Set local storage item', () => {
   });
 
   test('data is added into local storage', () => {
-    const mockJson = { description: "fake-value 123", completed: false };
+    const mockJson = { description: 'fake-value 123', completed: false };
     addTodo(mockJson);
     expect(window.localStorage.getItem('todos')).toEqual(JSON.stringify(mockJson));
-
   });
 
   // Check if an element with the expected text content was added to the DOM
   const addedItem = dom.window.document.body.children[0];
   expect(addedItem).not.toBeNull();
-
 });

@@ -4,7 +4,7 @@ import { toggleChkBox, clearCompletedChkBox } from './checkbox_todo.js';
 
 export default function displayTodos(todos) {
 // function displayTodos(todos) {
-  
+
   const todoList = document.getElementById('mytodo');
 
   todoList.className = 'todoList';
@@ -85,8 +85,8 @@ export default function displayTodos(todos) {
     rmBtn.value = 'Remove';
     rmBtn.addEventListener('click', () => {
       todos.splice(`${index}`, 1);
-        removeTheList(todos);
-        window.location.reload();
+      removeTheList(todos);
+      window.location.reload();
     });
 
     li.appendChild(chkbox);
@@ -114,5 +114,3 @@ export default function displayTodos(todos) {
   });
   todoList.appendChild(clearAllBtn);
 }
-
-module.exports = displayTodos;

@@ -1,32 +1,31 @@
-const jsdom = require("jsdom");
+const jsdom = require('jsdom');
+
 const { JSDOM } = jsdom;
 
-const removeTheList = require('./remove_todo');
+const removeTheList = require('./remove_todo.js');
+
 let store = {};
-const fakeLocalStorage = (function() {
+// const fakeLocalStorage = (function () {
+const fakeLocalStorage = () => ({
+  getItem(key) {
+    return store[key] || null;
+  },
+  setItem(key, value) {
+    store[key] = value.toString();
+  },
+  removeItem(key) {
+    delete store[key];
+  },
+  clear() {
+    store = {};
+  },
+});
 
-    return {
-      getItem: function(key) {
-        return store[key] || null;
-      },
-      setItem: function(key, value) {
-        store[key] = value.toString();
-      },
-      removeItem: function(key) {
-        delete store[key];
-      },
-      clear: function() {
-        store = {};
-      }
-    };
-  })();
-
-  Object.defineProperty(window, 'localStorage', {
-    value: fakeLocalStorage
-  });
+Object.defineProperty(window, 'localStorage', {
+  value: fakeLocalStorage,
+});
 
 describe('Set local storage item', () => {
-
   const dom = new JSDOM(
     `<html>
     <body>
@@ -49,15 +48,14 @@ describe('Set local storage item', () => {
     const itemContainer = dom.window.document.body;
     itemContainer.innerHTML = '';
   });
-    test('Data is deleted from local storage', () => {
-        const deletedIndex = 1;
-        removeTheList(deletedIndex);
-      expect(`${deletedIndex}`).toEqual(window.localStorage.getItem('todos'));
-      dom.innerHTML = `<body>
+  test('Data is deleted from local storage', () => {
+    const deletedIndex = 1;
+    removeTheList(deletedIndex);
+    expect(`${deletedIndex}`).toEqual(window.localStorage.getItem('todos'));
+    dom.innerHTML = `<body>
       <script>document.body.removeChild(document.body.firstChild);</script>
     </body>`;
-    });
-    const addedItem = dom.window.document.body.children;
-    expect(addedItem).toHaveLength(0);
-    
   });
+  const addedItem = dom.window.document.body.children;
+  expect(addedItem).toHaveLength(0);
+});

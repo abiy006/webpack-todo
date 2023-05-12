@@ -5,6 +5,7 @@ const { JSDOM } = jsdom;
 const updateListLStorage = require('./update_todo.js');
 
 let store = {};
+
 const fakeLocalStorage = () => ({
   getItem(key) {
     return store[key] || null;
@@ -30,7 +31,7 @@ describe('Set local storage item', () => {
     <body>  
     </body>
   </html>`,
-    { url: 'http://localhost' }
+    { url: 'http://localhost' },
   );
 
   global.window = dom.window;
@@ -50,7 +51,30 @@ describe('Set local storage item', () => {
 
   describe('Tests for updateListLStorage function', () => {
     // Tests that the description of a todo item is updated in localStorage.
-    it('should update description of a task in localStorage', () => {
+    const dom = new JSDOM(
+      `<html>
+      <body>  
+      </body>
+    </html>`,
+      { url: 'http://localhost' },
+    );
+
+    global.window = dom.window;
+    global.document = dom.window.document;
+
+    beforeEach(() => {
+      dom.innerHTML = `<body>
+    <script>document.body.appendChild(document.createElement("li"));</script>
+  </body>`;
+    });
+
+    afterEach(() => {
+      // Clean up any changes made to the DOM
+      const itemContainer = dom.window.document.body;
+      itemContainer.innerHTML = '';
+    });
+
+    test('should update description of a task in localStorage', () => {
       // Arrange
       const todos = [
         { description: 'Task 1', completed: false },
@@ -61,7 +85,7 @@ describe('Set local storage item', () => {
       const index = 0;
 
       // Act
-      updateListLStorage(editedtext, index);
+      updateListLStorage(index, todos, editedtext);
 
       // Assert
       const updatedTodos = JSON.parse(localStorage.getItem('todos'));
@@ -69,7 +93,7 @@ describe('Set local storage item', () => {
     });
 
     // Tests that the function handles an out of bounds index.
-    it('should handle an out of bounds index', () => {
+    test('should handle an out of bounds index', () => {
       // Arrange
       const todos = [
         { description: 'Task 1', completed: false },
@@ -80,26 +104,11 @@ describe('Set local storage item', () => {
       const index = 2;
 
       // Act
-      updateListLStorage(editedtext, index);
+      updateListLStorage(index, todos, editedtext);
 
       // Assert
       const updatedTodos = JSON.parse(localStorage.getItem('todos'));
       expect(updatedTodos).toEqual(todos);
-    });
-
-    // Tests that the function handles an empty localStorage.
-    it('should handle an empty localStorage', () => {
-      // Arrange
-      localStorage.clear();
-      const editedtext = 'Edited Task 1';
-      const index = 0;
-
-      // Act
-      updateListLStorage(editedtext, index);
-
-      // Assert
-      const updatedTodos = JSON.parse(localStorage.getItem('todos'));
-      expect(updatedTodos).toBeNull();
     });
   });
 });

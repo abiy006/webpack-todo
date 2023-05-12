@@ -3,6 +3,8 @@ import removeTheList from './remove_todo.js';
 import { toggleChkBox, clearCompletedChkBox } from './checkbox_todo.js';
 
 export default function displayTodos(todos) {
+// function displayTodos(todos) {
+
   const todoList = document.getElementById('mytodo');
 
   todoList.className = 'todoList';
@@ -13,7 +15,15 @@ export default function displayTodos(todos) {
   const form = document.createElement('form');
   form.style.display = 'flex';
   form.style.width = '50%';
-  form.addEventListener('submit', () => { addTodo(todos); });
+  form.addEventListener('submit', () => {
+    if (localStorage.getItem('todos')) {
+      todos = JSON.parse(localStorage.getItem('todos'));
+    }
+    const description = document.getElementById('target_todo').value;
+    const newTodo = { description, completed: false };
+    todos.push(newTodo);
+    addTodo(todos);
+  });
   const input1 = document.createElement('input');
   input1.id = 'target_todo';
   input1.type = 'text';
@@ -74,7 +84,9 @@ export default function displayTodos(todos) {
     rmBtn.setAttribute('data-index', `${index}`);
     rmBtn.value = 'Remove';
     rmBtn.addEventListener('click', () => {
-      removeTheList(`${index}`, todos);
+      todos.splice(`${index}`, 1);
+      removeTheList(todos);
+      window.location.reload();
     });
 
     li.appendChild(chkbox);

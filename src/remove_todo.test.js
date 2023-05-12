@@ -5,7 +5,6 @@ const { JSDOM } = jsdom;
 const removeTheList = require('./remove_todo.js');
 
 let store = {};
-// const fakeLocalStorage = (function () {
 const fakeLocalStorage = () => ({
   getItem(key) {
     return store[key] || null;

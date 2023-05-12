@@ -4,7 +4,6 @@ import { updateListText, updateListLStorage } from './update_todo.js';
 import { toggleChkBox, clearCompletedChkBox } from './checkbox_todo.js';
 
 export default function displayTodos(todos) {
-
   const todoList = document.getElementById('mytodo');
 
   todoList.className = 'todoList';
@@ -63,14 +62,13 @@ export default function displayTodos(todos) {
     desc.textContent = todo.description;
 
     desc.addEventListener('click', () => {
-
       updateListText(index, desc, todo, li);
 
-        li.addEventListener('submit', () => {
-          const editedtext = document.getElementById(`input${index}`).value;
-          updateListLStorage(index, todos, editedtext);
-        });
+      li.addEventListener('submit', () => {
+        const editedtext = document.getElementById(`input${index}`).value;
+        updateListLStorage(index, todos, editedtext);
       });
+    });
 
     const rmBtn = document.createElement('input');
     rmBtn.type = 'button';
@@ -110,5 +108,3 @@ export default function displayTodos(todos) {
   });
   todoList.appendChild(clearAllBtn);
 }
-
-

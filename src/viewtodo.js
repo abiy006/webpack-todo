@@ -1,6 +1,6 @@
 import addTodo from './add_todo.js';
 import removeTheList from './remove_todo.js';
-import updateList from './update_todo.js';
+import { updateListText, updateListLStorage } from './update_todo.js';
 import { toggleChkBox, clearCompletedChkBox } from './checkbox_todo.js';
 
 export default function displayTodos(todos) {
@@ -62,7 +62,15 @@ export default function displayTodos(todos) {
     desc.setAttribute('class', 'addedListItem');
     desc.textContent = todo.description;
 
-    updateList (desc, index, todo, todos, li);
+    desc.addEventListener('click', () => {
+
+      updateListText(index, desc, todo, li);
+
+        li.addEventListener('submit', () => {
+          const editedtext = document.getElementById(`input${index}`).value;
+          updateListLStorage(index, todos, editedtext);
+        });
+      });
 
     const rmBtn = document.createElement('input');
     rmBtn.type = 'button';
